@@ -1,6 +1,4 @@
 export const state = {
-  app_key: 'AD1B17FF3AC8DD98E733221A994C902F',
-  sign: 'E0C54F9B37D594FFA7CE84B47FAEA770',
   name: '张三',
     number: '0',
     list: [

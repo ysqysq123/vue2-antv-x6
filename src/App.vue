@@ -1,44 +1,38 @@
 <template>
-  <div>
-    <div id="graph"></div>
-  </div>
+      <router-view></router-view>
 </template>
-
 <script>
-// eslint-disable-next-line
-/* eslint-disable */
-import { Graph } from "@antv/x6";
-import "@antv/x6-vue-shape";
-let graph = null;
 export default {
-  name: "App",
-  mounted() {
-    graph = new Graph({
-      container: document.getElementById("graph"),
-      width: 1000,
-      height: 1000,
-      grid: true,
-    });
-    const node = graph.addNode({
-      x: 200,
-      y: 200,
-      width: 300,
-      height: 300,
-      attrs: {
-        body: {
-          fill: "red",
-        },
-        label: {
-          fontSize: 32,
-          text: "你好",
-        },
-      },
-    });
-    node.attr("rect/title", "Description of the rectangle");
-    node.attr("text/title", "Description of the rectangle");
+  data() {
+    return {
+    }
   },
-};
+  methods: {
+  },
+}
 </script>
-
-<style>
+<style lang="less" scoped>
+.all {
+  height: 100%;
+  display: flex;
+  .left{
+    width: 200px;
+    height: 100%;
+  }
+}
+.fall {
+  display: grid;
+  grid-template-columns: repeat(4, 200px);
+  grid-gap: 20px;
+  > div{
+    // height: 300px;
+    box-shadow: dimgray;
+    background-color: aqua;
+    text-align: center;
+  }
+  img {
+    width: 100%;
+    // height: calc(100% - 21px);
+  }
+}
 </style>

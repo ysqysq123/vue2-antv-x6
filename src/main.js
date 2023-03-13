@@ -7,7 +7,6 @@ import 'view-design/dist/styles/iview.css'
 import axios from 'axios'
 import Qs from 'qs'
 import _ from 'lodash'
-// axios.defaults.baseURL = '/api'
 
 Vue.prototype._ = _
 Vue.prototype.$axios = axios

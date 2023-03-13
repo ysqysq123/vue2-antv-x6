@@ -5,12 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "canvas-confetti": "^1.6.0",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.4",
+    "less-loader": "^4.1.0",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
     "view-design": "^4.7.0",
@@ -21,7 +23,6 @@
   "devDependencies": {
     "@antv/x6": "^1.34.0",
     "@antv/x6-vue-shape": "^1.5.0",
-    "@vue/composition-api": "^1.7.0",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -29,12 +30,14 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/composition-api": "^1.7.0",
     "@vue/eslint-config-standard": "^6.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.3",
+    "less": "^4.1.3",
     "vue-template-compiler": "^2.6.14"
   },
   "rules": {
