@@ -3,9 +3,9 @@
 </style>
 <template>
     <div>
-      <Table :columns="columns" :data="tableData">
-        <template slot="label" slot-scope="{ row, index }">
-          <div style="display: flex;">
+      <Table :columns="columns" :data="row.childrenData" @on-row-click="onRowClick">
+        <template slot="label" slot-scope="{ row }">
+          <div style="display: flex;justify-content: center;align-items: center;">
             <div v-for="item in row.labels" :key="item" class="label">
               <div>{{ item }}</div>
             </div>
@@ -30,56 +30,52 @@
 <script>
     export default {
         props: {
-            row: Object
+            row: Object,
         },
         data () {
           return {
             columns: [
               {
                 title: '数据集名称',
-                key: 'name'
+                key: 'name',
+                align: 'center'
               },
               {
                 title: '数据集类型',
-                key: 'type'
+                key: 'type',
+                align: 'center'
               },
               {
                 title: '标签',
                 key: 'labels',
-                slot: 'label'
+                slot: 'label',
+                align: 'center'
               },
               {
                 title: '是否关联',
-                key: 'isRelevance'
+                key: 'isRelevance',
+                align: 'center'
               },
               {
                 title: '继承分组token',
-                key: 'token'
+                key: 'token',
+                align: 'center'
               },
               {
                 title: '操作',
-                slot: 'action'
+                width: 250,
+                slot: 'action',
+                align: 'center'
               }
             ],
-            tableData: [
-              {
-                name: '数据集1',
-                type: 'string',
-                labels: ['123', '456'],
-                isRelevance: true,
-                token: '456c1a1va3va'
-              },
-              {
-                name: '数据集2',
-                type: 'number',
-                labels: ['789', '999'],
-                isRelevance: false,
-                token: 'faklfa1023a1g23a1ga3g'
-              }
-            ]
           }
         },
-    };
+        methods: {
+          onRowClick(row) {
+          console.log(this.$parent);
+        }
+        },
+    }
 </script>
 <style scoped>
 .label{

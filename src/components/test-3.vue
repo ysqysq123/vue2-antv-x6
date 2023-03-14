@@ -1,29 +1,38 @@
 <template>
-    <Table :columns="columns10" :data="data9" :show-header="false">
-      <template slot="action" slot-scope="{ row, index }">
-        <span class="action-btn">新增数据集</span>
-        <span class="action-line"></span>
-        <Dropdown transfer >
-          <a href="javascript:void(0)"> 更多 </a>
-          <DropdownMenu slot="list">
-            <DropdownItem name="rename">重命名</DropdownItem>
-            <DropdownItem name="delete">删除</DropdownItem>
-            <DropdownItem name="import">导入</DropdownItem>
-            <DropdownItem name="setting">设置</DropdownItem>
-            <DropdownItem name="copy">复制</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </template>
+    <Table :columns="columns10" :data="data9" :show-header="false" @on-expand ="expand"  @on-row-click="onRowClick">
+        <template slot="img" slot-scope="{ row, index }">
+            <div class="img">
+                <img :src= "row._expanded ? open : close"  alt="">
+            </div>
+        </template>
+        <template slot="action" slot-scope="{ row, index }">
+            <span class="action-btn">新增数据集</span>
+            <span class="action-line"></span>
+            <Dropdown transfer >
+            <a href="javascript:void(0)"> 更多 </a>
+            <DropdownMenu slot="list">
+                <DropdownItem name="rename">重命名</DropdownItem>
+                <DropdownItem name="delete">删除</DropdownItem>
+                <DropdownItem name="import">导入</DropdownItem>
+                <DropdownItem name="setting">设置</DropdownItem>
+                <DropdownItem name="copy">复制</DropdownItem>
+            </DropdownMenu>
+            </Dropdown>
+        </template>
     </Table>
 </template>
 <script>
-    import expandRow from './table-expand.vue'
+    import expandRow from './table-expand.vue';
+    import close from '../assets/img/close.png';
+    import open from '../assets/img/open.png';
     export default {
         components: {
           expandRow,
         },
         data () {
             return {
+                close,
+                open,
                 columns10: [
                     {
                         type: 'expand',
@@ -32,70 +41,93 @@
                             return h(expandRow, {
                                 props: {
                                     row: params.row,
-                                    index: params.index
                                 }
                             })
                         }
                     },
                     {
+                        title: 'img',
+                        slot: 'img',
+                        width: 30,
+                        align: 'left'
+                    },
+                    {
                         title: 'Name',
-                        key: 'name'
+                        key: 'name',
                     },
                     {
                         title: 'Address',
                         key: 'address',
                         slot: 'action',
-                        width: 180
+                        align: 'right'
                     }
                 ],
                 data9: [
                     {
-                        name: 'John Brown',
-                        age: 18,
-                        address: 'New York No. 1 Lake Park',
-                        job: 'Data engineer',
-                        interest: 'badminton',
-                        birthday: '1991-05-14',
-                        book: 'Steve Jobs',
-                        movie: 'The Prestige',
-                        music: 'I Cry'
+                        name: '数据集一',
+                        _expanded: false,
+                        childrenData: [
+                            {
+                                name: '数据集1',
+                                type: 'string',
+                                labels: ['123', '456'],
+                                isRelevance: true,
+                                token: '456c1a1va3va'
+                            },
+                            {
+                                name: '数据集2',
+                                type: 'number',
+                                labels: ['789', '999'],
+                                isRelevance: false,
+                                token: 'faklfa1023a1g23a1ga3g'
+                            }
+                        ],
                     },
                     {
-                        name: 'Jim Green',
-                        age: 25,
-                        address: 'London No. 1 Lake Park',
-                        job: 'Data Scientist',
-                        interest: 'volleyball',
-                        birthday: '1989-03-18',
-                        book: 'My Struggle',
-                        movie: 'Roman Holiday',
-                        music: 'My Heart Will Go On'
+                        name: '数据集二',
+                        _expanded: false,
+                        childrenData: [
+                            {
+                                name: '数据集3',
+                                type: 'string',
+                                labels: ['123', '456'],
+                                isRelevance: true,
+                                token: '456c1a1va3va'
+                            },
+                            {
+                                name: '数据集4',
+                                type: 'number',
+                                labels: ['789', '999'],
+                                isRelevance: false,
+                                token: 'faklfa1023a1g23a1ga3g'
+                            }
+                        ]
                     },
                     {
-                        name: 'Joe Black',
-                        age: 30,
-                        address: 'Sydney No. 1 Lake Park',
-                        job: 'Data Product Manager',
-                        interest: 'tennis',
-                        birthday: '1992-01-31',
-                        book: 'Win',
-                        movie: 'Jobs',
-                        music: 'Don’t Cry'
+                        name: '数据集三',
+                        _expanded: false,
                     },
                     {
-                        name: 'Jon Snow',
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park',
-                        job: 'Data Analyst',
-                        interest: 'snooker',
-                        birthday: '1988-7-25',
-                        book: 'A Dream in Red Mansions',
-                        movie: 'A Chinese Ghost Story',
-                        music: 'actor'
+                        name: '数据集四',
+                        _expanded: false,
                     }
-                ]
+                ],
+
             }
-        }
+        },
+        methods: {
+            expand (row, status) {
+                // console.log(row);
+                row._expanded = status
+                const index = this.data9.findIndex(item => item.name === row.name)
+                this.$set(this.data9[index], '_expanded', status)
+            },
+            onRowClick (row, index) {
+                const status = !row._expanded
+                this.$set(this.data9[index], "_expanded", status);
+// this.$set(this.data[index], "highlight",status);
+            }
+        },
     }
 </script>
 <style scoped>
@@ -113,5 +145,11 @@
 }
 /deep/.ivu-table-expanded-cell{
   padding: 0px;
+}
+/deep/.ivu-table:before {
+  height: 0px;
+}
+/deep/ .ivu-table-cell{
+    padding-left: 0px;
 }
 </style>
