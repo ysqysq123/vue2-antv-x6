@@ -3,7 +3,7 @@
 </style>
 <template>
     <div>
-      <Table :columns="columns" :data="row.childrenData" @on-row-click="onRowClick">
+      <Table :columns="columns" :data="row.childrenData" @on-row-click="onRowClick" class="table">
         <template slot="label" slot-scope="{ row }">
           <div style="display: flex;justify-content: center;align-items: center;">
             <div v-for="item in row.labels" :key="item" class="label">
@@ -77,7 +77,7 @@
         },
     }
 </script>
-<style scoped>
+<style scoped lang="less">
 .label{
   background-color: aquamarine;
   display: flex;
@@ -103,4 +103,16 @@
   margin: 0 8px;
   vertical-align: middle;
 }
+
+/* /deep/ .ivu-table-cell {
+    width: 100%;
+  } */
+.table {
+/deep/ .ivu-table:before {
+        // background: white;
+        height: 1px;
+      }
+}
+
+
 </style>

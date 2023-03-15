@@ -124,7 +124,7 @@
             },
             onRowClick (row, index) {
                 const status = !row._expanded
-                this.$set(this.data9[index], "_expanded", status);
+                this.$set(this.data9[index], '_expanded', status)
 // this.$set(this.data[index], "highlight",status);
             }
         },
@@ -152,4 +152,7 @@
 /deep/ .ivu-table-cell{
     padding-left: 0px;
 }
+/deep/ .ivu-table:before {
+        background: white;
+      }
 </style>
